@@ -1,13 +1,13 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { StatusBar } from 'react-native';
-import Stack from './navigation/Stack';
+import Tabs from './navigation/Tabs';
 
 export default function App() {
   return (
     <>
       <NavigationContainer>
-        <Stack />
+        <Tabs />
       </NavigationContainer>
       <StatusBar barStyle="dark-content" />
     </>
