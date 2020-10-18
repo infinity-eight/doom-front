@@ -2,6 +2,7 @@ import React from 'react';
 import { Text, Dimensions } from 'react-native';
 import Swiper from 'react-native-web-swiper';
 import styled from 'styled-components/native';
+import NextBlood from '../../components/NextBlood';
 
 const { width: WIDTH, height: HEIGHT } = Dimensions.get('window');
 
@@ -62,5 +63,7 @@ export default () => (
         </View>
       </Swiper>
     </SliderContainer>
+    <NextBlood title={'다음 헌혈가능일까지'} />
+    <View></View>
   </MainWarp>
 );

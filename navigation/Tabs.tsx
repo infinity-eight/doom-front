@@ -1,4 +1,4 @@
-import React, { useLayoutEffect } from 'react';
+import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
 import MainStackScreen from './Stacks/MainStackScreen';
@@ -35,16 +35,6 @@ export default ({ navigation, route }: any) => {
       })}
       tabBarOptions={{
         showLabel: false,
-
-        /* style: {
-          borderTopColor: 'white',
-          shadowColor: '#000000',
-          shadowOpacity: 0.3,
-          shadowRadius: 5,
-          shadowOffset: {
-            height: 3,
-          },
-        }, */
       }}
     >
       <Tabs.Screen name="Main" component={MainStackScreen} />
