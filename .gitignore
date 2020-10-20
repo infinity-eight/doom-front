@@ -8,6 +8,9 @@ npm-debug.*
 *.mobileprovision
 *.orig.*
 web-build/
+.prettierrc
+.eslintignore
+.eslintrc
 
 # macOS
 .DS_Store

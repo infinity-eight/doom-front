@@ -29,7 +29,11 @@ export default ({ navigation, route }: any) => {
             iconName += 'contact';
           }
           return (
-            <Ionicons name={iconName} color={focused ? '#F33328' : 'grey'} size={26} />
+            <Ionicons
+              name={iconName}
+              color={focused ? '#F33328' : 'grey'}
+              size={26}
+            />
           );
         },
       })}

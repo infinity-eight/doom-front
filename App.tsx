@@ -6,7 +6,6 @@ import { NavigationContainer } from '@react-navigation/native';
 import { Asset } from 'expo-asset';
 import { Ionicons, FontAwesome } from '@expo/vector-icons';
 import Stack from './navigation/Stack';
-import LoginStack from './navigation/LoginStack';
 
 const cacheImages = (images: any[]) =>
   images.map((image) => {
@@ -21,7 +20,6 @@ const cacheFonts = (fonts: any[]) => fonts.map((font) => Font.loadAsync(font));
 
 export default function App() {
   const [isReady, setIsReady] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const loadAssets = (): any => {
     const images = cacheImages([
       'https://i.kym-cdn.com/photos/images/newsfeed/000/290/992/0aa.jpg',
@@ -33,22 +31,12 @@ export default function App() {
   const onFinish = () => setIsReady(true);
   return isReady ? (
     <>
-    {isLoggedIn 
-    ? (<>
       <NavigationContainer>
         <Stack />
-      </NavigationContainer>  
+      </NavigationContainer>
       <StatusBar barStyle="dark-content" />
-    </>) 
-    : (<>
-      <NavigationContainer>
-        <LoginStack />
-      </NavigationContainer>  
-      <StatusBar barStyle="dark-content" />
-    </>)
-    }
-  </>
-  ):(
+    </>
+  ) : (
     <AppLoading
       startAsync={loadAssets}
       onFinish={onFinish}

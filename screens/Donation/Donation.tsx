@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigation } from '@react-navigation/native';
 import styled from 'styled-components/native';
 import Input from '../../components/Search/Input';
 import List from '../../components/List';
@@ -31,21 +32,24 @@ const ListWarp = styled.View`
   justify-content: space-around;
 `;
 
-export default () => (
-  <>
-    <Input />
-    <MainWarp>
-      <TouchableOpacity>
-        <RegisterBtn>도옴이 필요해요</RegisterBtn>
-      </TouchableOpacity>
-      <ListWarp>
-        <List />
-        <List />
-        <List />
-        <List />
-        <List />
-        <List />
-      </ListWarp>
-    </MainWarp>
-  </>
-);
+export default function Donation() {
+  const navigation = useNavigation();
+  return (
+    <>
+      <Input />
+      <MainWarp>
+        <TouchableOpacity onPress={() => navigation.navigate('작성')}>
+          <RegisterBtn>도옴이 필요해요</RegisterBtn>
+        </TouchableOpacity>
+        <ListWarp>
+          <List />
+          <List />
+          <List />
+          <List />
+          <List />
+          <List />
+        </ListWarp>
+      </MainWarp>
+    </>
+  );
+}

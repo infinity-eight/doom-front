@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigation } from '@react-navigation/native';
 import styled from 'styled-components/native';
 import Register from '../Register';
 
@@ -20,13 +21,13 @@ const TextInput = styled.TextInput`
   width: 300px;
   height: 40px;
   border: solid 2px white;
-  border-bottom-color: #F33328;
+  border-bottom-color: #f33328;
   margin-bottom: 20px;
   font-size: 20px;
 `;
 
 const LoginBtn = styled.TouchableOpacity`
-  background-color: #F33328;
+  background-color: #f33328;
   justify-content: center;
   align-items: center;
   width: 300px;
@@ -54,13 +55,19 @@ const RegisterBtnText = styled.Text`
   font-size: 15px;
 `;
 
-export default () => (
-  <MainWarp>
-    <Image source={require('./../../../assets/icon.png')} />
-    <TextInput placeholder="아이디" />
-    <TextInput placeholder="비밀번호" />
-    <LoginBtn><LoginBtnText>로그인</LoginBtnText></LoginBtn>
-    <RegisterBtn onPress={Register}><RegisterBtnText>회원가입</RegisterBtnText></RegisterBtn>
-
-  </MainWarp>
-);
+export default function Login() {
+  const navigation = useNavigation();
+  return (
+    <MainWarp>
+      <Image source={require('./../../../assets/icon.png')} />
+      <TextInput placeholder="아이디" />
+      <TextInput placeholder="비밀번호" />
+      <LoginBtn>
+        <LoginBtnText>로그인</LoginBtnText>
+      </LoginBtn>
+      <RegisterBtn onPress={() => navigation.navigate('Register')}>
+        <RegisterBtnText>회원가입</RegisterBtnText>
+      </RegisterBtn>
+    </MainWarp>
+  );
+}

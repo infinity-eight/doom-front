@@ -7,7 +7,7 @@ const DonationStack = createStackNavigator();
 
 export default function DonationStackScreen() {
   return (
-    <DonationStack.Navigator>
+    <DonationStack.Navigator mode="modal">
       <DonationStack.Screen
         name="기부"
         component={Donation}
