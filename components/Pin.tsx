@@ -1,8 +1,7 @@
 import React from 'react';
 import { useNavigation } from '@react-navigation/native';
-import { TouchableOpacity } from 'react-native';
+import { TouchableOpacity, Platform } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { Platform } from 'react-native';
 
 export default function Pin({ color }: any) {
   const navigation = useNavigation();

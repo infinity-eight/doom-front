@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useLayoutEffect } from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
 import MainStackScreen from './Stacks/MainStackScreen';
@@ -9,7 +9,16 @@ import { Platform } from 'react-native';
 
 const Tabs = createBottomTabNavigator();
 
+const getHeaderName = (route: any) =>
+  route?.state?.routeNames[route.state.index] || '도옴';
+
 export default ({ navigation, route }: any) => {
+  useLayoutEffect(() => {
+    const name = getHeaderName(route);
+    navigation.setOptions({
+      title: name,
+    });
+  }, [route]);
   return (
     <Tabs.Navigator
       screenOptions={({ route }) => ({
@@ -19,13 +28,13 @@ export default ({ navigation, route }: any) => {
         },
         tabBarIcon: ({ focused }) => {
           let iconName = Platform.OS === 'ios' ? 'ios-' : 'md-';
-          if (route.name === 'Main') {
+          if (route.name === '도옴') {
             iconName += 'home';
-          } else if (route.name === 'Donation') {
+          } else if (route.name === '도네') {
             iconName += 'heart';
-          } else if (route.name === 'Chat') {
+          } else if (route.name === '채팅') {
             iconName += 'chatboxes';
-          } else if (route.name === 'Profile') {
+          } else if (route.name === '프로필') {
             iconName += 'contact';
           }
           return (
@@ -41,10 +50,10 @@ export default ({ navigation, route }: any) => {
         showLabel: false,
       }}
     >
-      <Tabs.Screen name="Main" component={MainStackScreen} />
-      <Tabs.Screen name="Donation" component={DonationStackScreen} />
-      <Tabs.Screen name="Chat" component={ChatStackScreen} />
-      <Tabs.Screen name="Profile" component={UserStackScreen} />
+      <Tabs.Screen name="도옴" component={MainStackScreen} />
+      <Tabs.Screen name="도네" component={DonationStackScreen} />
+      <Tabs.Screen name="채팅" component={ChatStackScreen} />
+      <Tabs.Screen name="프로필" component={UserStackScreen} />
     </Tabs.Navigator>
   );
 };
