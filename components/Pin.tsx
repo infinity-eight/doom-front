@@ -7,7 +7,7 @@ export default function Pin({ color }: any) {
   const navigation = useNavigation();
   let iconName = Platform.OS === 'ios' ? 'ios-' : 'md-';
   return (
-    <TouchableOpacity onPress={() => navigation.navigate('Map')}>
+    <TouchableOpacity onPress={() => navigation.navigate('맵')}>
       <Ionicons
         name={`${iconName}pin`}
         color={color}

@@ -3,6 +3,6 @@ import { View, Text } from 'react-native';
 
 export default () => (
   <View>
-    <Text>Detail</Text>
+    <Text>장소</Text>
   </View>
 );

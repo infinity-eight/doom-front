@@ -2,14 +2,21 @@ import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import Donation from '../../screens/Donation';
 import Pin from '../../components/Pin';
+import MapTaps from '../MapTaps';
+import Writing from '../../screens/Writing';
 
 const DonationStack = createStackNavigator();
 
 export default function DonationStackScreen() {
   return (
-    <DonationStack.Navigator mode="modal">
+    <DonationStack.Navigator
+      mode="modal"
+      screenOptions={{
+        headerBackTitleVisible: false,
+      }}
+    >
       <DonationStack.Screen
-        name="기부"
+        name="게시판"
         component={Donation}
         options={{
           headerStyle: {
@@ -21,6 +28,8 @@ export default function DonationStackScreen() {
           headerRight: () => <Pin color="#fff" />,
         }}
       />
+      <DonationStack.Screen name="맵" component={MapTaps} />
+      <DonationStack.Screen name="작성" component={Writing} />
     </DonationStack.Navigator>
   );
 }
