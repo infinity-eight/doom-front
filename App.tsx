@@ -21,7 +21,7 @@ const cacheFonts = (fonts: any[]) => fonts.map((font) => Font.loadAsync(font));
 export default function App() {
   const [isReady, setIsReady] = useState(false);
   const [state, dispatch] = React.useReducer(
-    (prevState: any, action: { type: any; token: any; }) => {
+    (prevState: any, action: { type: any; token: any }) => {
       switch (action.type) {
         case 'RESTORE_TOKEN':
           return {
@@ -47,7 +47,7 @@ export default function App() {
       isLoading: true,
       isSignout: false,
       userToken: null,
-    }
+    },
   );
   const loadAssets = (): any => {
     const images = cacheImages([

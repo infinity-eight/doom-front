@@ -32,7 +32,7 @@ const ListWarp = styled.View`
   justify-content: space-around;
 `;
 
-export default function Donation() {
+export default function () {
   const navigation = useNavigation();
   return (
     <>

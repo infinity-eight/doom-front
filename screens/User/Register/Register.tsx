@@ -71,7 +71,7 @@ export default function () {
     if (state.name == '' && state.id == '' && state.password == '') {
       alert('빈칸을 모두 채워주세요!');
       console.log(state.name);
-    } else if(state.password !== state.repassword) {
+    } else if (state.password !== state.repassword) {
       alert('비밀번호가 서로 다릅니다.');
       console.log(state.name);
     } else {
@@ -102,10 +102,28 @@ export default function () {
   return (
     <MainWarp>
       <Image source={require('./../../../assets/icon.png')} />
-      <TextInput placeholder="이름" value={state.name} onChange={handleChange('name')} />
-      <TextInput placeholder="아이디" value={state.id} onChange={handleChange('id')} />
-      <TextInput placeholder="비밀번호" secureTextEntry={true} value={state.password} onChange={handleChange('password')} />
-      <TextInput placeholder="비밀번호 확인" secureTextEntry={true} value={state.repassword} onChange={handleChange('repassword')} />
+      <TextInput
+        placeholder="이름"
+        value={state.name}
+        onChange={handleChange('name')}
+      />
+      <TextInput
+        placeholder="아이디"
+        value={state.id}
+        onChange={handleChange('id')}
+      />
+      <TextInput
+        placeholder="비밀번호"
+        secureTextEntry={true}
+        value={state.password}
+        onChange={handleChange('password')}
+      />
+      <TextInput
+        placeholder="비밀번호 확인"
+        secureTextEntry={true}
+        value={state.repassword}
+        onChange={handleChange('repassword')}
+      />
       <RegisterBtn onPress={() => handleSubmit()}>
         <RegisterBtnText>회원가입</RegisterBtnText>
       </RegisterBtn>

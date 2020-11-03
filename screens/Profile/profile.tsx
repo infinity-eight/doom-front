@@ -61,8 +61,9 @@ const BtnWarp = styled.View`
 const Btn = styled.TouchableOpacity``;
 
 const BtnImage = styled.Image`
-  width: 60px;
-  height: 60px;
+  width: 50px;
+  height: 50px;
+  overflow: visible;
 `;
 
 const BtnText = styled.Text`
@@ -110,25 +111,25 @@ export default function () {
           <Image source={require('../../images/defaultProfile.jpg')} />
         </ImageWarp>
         <NameWarp>
-          <Name>이름</Name>
+          <Name>노수하</Name>
         </NameWarp>
       </ProfileView>
       <BtnView>
         <BtnWarp>
           <Btn>
-            <BtnImage source={require('../../images/defaultProfile.jpg')} />
+            <BtnImage source={require('../../images/icons/15_1.png')} />
             <BtnText>헌혈내역</BtnText>
           </Btn>
         </BtnWarp>
         <BtnWarp>
           <Btn>
-            <BtnImage source={require('../../images/defaultProfile.jpg')} />
+            <BtnImage source={require('../../images/icons/16_1.png')} />
             <BtnText>기부내역</BtnText>
           </Btn>
         </BtnWarp>
         <BtnWarp>
           <Btn>
-            <BtnImage source={require('../../images/defaultProfile.jpg')} />
+            <BtnImage source={require('../../images/icons/17_1.png')} />
             <BtnText>헌혈증서</BtnText>
           </Btn>
         </BtnWarp>

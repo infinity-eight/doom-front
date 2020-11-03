@@ -2,7 +2,7 @@ import React, { useLayoutEffect } from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
 import MainStackScreen from './Stacks/MainStackScreen';
-import DonationStackScreen from './Stacks/DonationStackScreen';
+import BoardStackScreen from './Stacks/BoardStackScreen';
 import ChatStackScreen from './Stacks/ChatStackScreen';
 import UserStackScreen from './Stacks/UserStackScreen';
 import { Platform } from 'react-native';
@@ -51,7 +51,7 @@ export default ({ navigation, route }: any) => {
       }}
     >
       <Tabs.Screen name="도옴" component={MainStackScreen} />
-      <Tabs.Screen name="도네" component={DonationStackScreen} />
+      <Tabs.Screen name="도네" component={BoardStackScreen} />
       <Tabs.Screen name="채팅" component={ChatStackScreen} />
       <Tabs.Screen name="프로필" component={UserStackScreen} />
     </Tabs.Navigator>

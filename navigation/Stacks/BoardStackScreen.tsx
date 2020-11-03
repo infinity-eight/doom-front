@@ -1,13 +1,13 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import Donation from '../../screens/Donation';
+import Board from '../../screens/Board';
 import Pin from '../../components/Pin';
 import MapTaps from '../MapTaps';
 import Writing from '../../screens/Writing';
 
 const DonationStack = createStackNavigator();
 
-export default function DonationStackScreen() {
+export default function () {
   return (
     <DonationStack.Navigator
       mode="modal"
@@ -17,15 +17,17 @@ export default function DonationStackScreen() {
     >
       <DonationStack.Screen
         name="게시판"
-        component={Donation}
+        component={Board}
         options={{
+          title: '도옴을 드릴게요',
+          headerLeft: () => '',
+          headerRight: () => <Pin color="#fff" />,
           headerStyle: {
             backgroundColor: '#f33328',
             borderBottomColor: '#f33328',
             shadowColor: '#f33328',
           },
           headerTintColor: '#fff',
-          headerRight: () => <Pin color="#fff" />,
         }}
       />
       <DonationStack.Screen name="맵" component={MapTaps} />

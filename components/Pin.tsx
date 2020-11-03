@@ -11,7 +11,7 @@ export default function Pin({ color }: any) {
       <Ionicons
         name={`${iconName}pin`}
         color={color}
-        size={26}
+        size={30}
         style={{ padding: 10 }}
       />
     </TouchableOpacity>

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { KeyboardAvoidingView, AsyncStorage } from 'react-native';
 import axios from 'axios';
 import { useNavigation } from '@react-navigation/native';
 import styled from 'styled-components/native';
@@ -94,7 +95,9 @@ export default function Login() {
         password: state.password,
       })
       .then(function (response) {
-        alert('로그인이 완료되었습니다!');
+        /*  AsyncStorage.setItem('userToken', response.token);
+        AsyncStorage.setItem('userName', response.userData.name); */
+        navigation.navigate('도옴');
       })
       .catch(function (error) {
         if (error.response) {
@@ -106,8 +109,17 @@ export default function Login() {
   return (
     <MainWarp>
       <Image source={require('./../../../assets/icon.png')} />
-      <TextInput placeholder="아이디" value={state.id} onChange={handleChange('id')} />
-      <TextInput placeholder="비밀번호" secureTextEntry={true} value={state.password} onChange={handleChange('password')} />
+      <TextInput
+        placeholder="아이디"
+        value={state.id}
+        onChange={handleChange('id')}
+      />
+      <TextInput
+        placeholder="비밀번호"
+        secureTextEntry={true}
+        value={state.password}
+        onChange={handleChange('password')}
+      />
       <LoginBtn onPress={() => handleSubmit()}>
         <LoginBtnText>로그인</LoginBtnText>
       </LoginBtn>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, Dimensions } from 'react-native';
+import { Dimensions } from 'react-native';
 import Swiper from 'react-native-web-swiper';
 import styled from 'styled-components/native';
 import NextBlood from '../../components/NextBlood';
@@ -8,6 +8,7 @@ const { width: WIDTH, height: HEIGHT } = Dimensions.get('window');
 
 const MainWarp = styled.View`
   background-color: white;
+
   flex: 1;
 `;
 
@@ -17,6 +18,15 @@ const SliderContainer = styled.View`
   margin-bottom: 50px;
 `;
 const View = styled.View``;
+
+const BackImage = styled.Image`
+  width: 100%;
+  height: 100%;
+`;
+
+const Image = styled.Image`
+  margin: 0 auto 0 auto;
+`;
 
 export default () => (
   <MainWarp>
@@ -39,7 +49,7 @@ export default () => (
             backgroundColor: 'rgba(20,20,200,0.3)',
           }}
         >
-          <Text>Slide 1</Text>
+          <BackImage source={require('../../images/main_bannner_01.jpg')} />
         </View>
         <View
           style={{
@@ -49,7 +59,7 @@ export default () => (
             backgroundColor: 'rgba(20,200,20,0.3)',
           }}
         >
-          <Text>Slide 2</Text>
+          <BackImage source={require('../../images/main_bannner_02.png')} />
         </View>
         <View
           style={{
@@ -59,11 +69,14 @@ export default () => (
             backgroundColor: 'rgba(200,20,20,0.3)',
           }}
         >
-          <Text>Slide 3</Text>
+          <BackImage source={require('../../images/main_bannner_03.jpg')} />
         </View>
       </Swiper>
     </SliderContainer>
     <NextBlood title={'다음 헌혈가능일까지'} />
-    <View></View>
+    <Image
+      style={{ width: '90%', height: 100, overflow: 'visible' }}
+      source={require('../../images/blood.png')}
+    />
   </MainWarp>
 );
