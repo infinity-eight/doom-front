@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigation } from '@react-navigation/native';
 import { Chevron } from 'react-native-shapes';
 import RNPickerSelect from 'react-native-picker-select';
 import { Ionicons } from '@expo/vector-icons';
@@ -148,11 +149,12 @@ const buttonTextStyle = {
 
 export default function () {
   let iconName = Platform.OS === 'ios' ? 'ios-' : 'md-';
+  const navigation = useNavigation();
   const [RedBlood, setRedBlood] = useState(false); // 적혈구
   const [Platelets, setPlatelets] = useState(false); // 혈소판
   const [Plasma, setPlasma] = useState(false); // 혈장
 
-  const [image, setImage] = useState(null);
+  const [image, setImage] = useState<any>(null);
 
   const requestPermisison = async () => {
     const response = await Permissions.askAsync(Permissions.CAMERA_ROLL);
@@ -177,6 +179,11 @@ export default function () {
       setImage(result.uri);
     }
   };
+  function handleSubmit() {
+    alert('등록이 완료되었습니다.');
+    navigation.goBack();
+  }
+
   return (
     <MainWarp>
       <ProgressSteps>
@@ -277,6 +284,7 @@ export default function () {
           previousBtnTextStyle={buttonTextStyle}
           finishBtnText="등록"
           previousBtnText="이전"
+          onSubmit={handleSubmit}
         >
           <StepView>
             <Title>도옴받으실 분의 {'\n'}사진을 올려주세요.</Title>

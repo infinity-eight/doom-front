@@ -27,13 +27,7 @@ const TextInput = styled.TextInput`
 const Button = styled.Button``;
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBR37tAPIucSWGFoAfSK23H2hkAueU60e4",
-  authDomain: "doom-back.firebaseapp.com",
-  databaseURL: "https://doom-back.firebaseio.com",
-  projectId: "doom-back",
-  storageBucket: "doom-back.appspot.com",
-  messagingSenderId: "283101016940",
-  appId: "1:283101016940:web:6671c532fb0e7d2f27b949"
+  ...
 };
 
 if (firebase.apps.length === 0) {
@@ -46,7 +40,7 @@ const db = firebase.firestore();
 const chatsRef = db.collection('chats');
 
 export default function () {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState<any>(null);
   const [name, setName] = useState('');
   const [messages, setMessages] = useState([]);
   useEffect(() => {

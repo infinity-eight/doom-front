@@ -12,7 +12,7 @@ export default function Pin({ color }: any) {
         name={`${iconName}pin`}
         color={color}
         size={30}
-        style={{ padding: 10 }}
+        style={{ marginRight: 10 }}
       />
     </TouchableOpacity>
   );

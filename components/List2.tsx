@@ -45,12 +45,12 @@ const BloodType = styled.Text`
 export default function () {
   const navigation = useNavigation();
   return (
-    <Container onPress={() => navigation.navigate('Detail')}>
+    <Container onPress={() => navigation.navigate('Detail2')}>
       <Deminus style={{ backgroundColor: 'red' }}>D-1</Deminus>
-      <Image source={require('../images/patient_1.jpg')} />
-      <Name>김현성</Name>
-      <Date>~20-11-10</Date>
-      <BloodType>🩸A+ 혈소판</BloodType>
+      <Image source={require('../images/patient_2.jpg')} />
+      <Name>박준상</Name>
+      <Date>~20-11-11</Date>
+      <BloodType>🩸B- 혈소판</BloodType>
     </Container>
   );
 }

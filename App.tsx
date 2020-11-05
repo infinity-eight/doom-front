@@ -1,75 +1,57 @@
-import React, { useState } from 'react';
-import { AppLoading } from 'expo';
-import * as Font from 'expo-font';
-import { Image, StatusBar } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { Asset } from 'expo-asset';
-import { Ionicons, FontAwesome } from '@expo/vector-icons';
-import Stack from './navigation/Stack';
+import { createAppContainer, createSwitchNavigator } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation-stack';
+import LoadingScreen from './screens/LoadingScreen';
+import LoginScreen from './screens/Auth/LoginScreen';
+import RegisterScreen from './screens/Auth/RegisterScreen';
+import MainStack from './navigation/MainStack';
+import * as firebase from 'firebase';
 
-const cacheImages = (images: any[]) =>
-  images.map((image) => {
-    if (typeof image === 'string') {
-      return Image.prefetch(image);
-    } else {
-      return Asset.fromModule(image).downloadAsync();
-    }
-  });
+const firebaseConfig = {
+  ...
+};
 
-const cacheFonts = (fonts: any[]) => fonts.map((font) => Font.loadAsync(font));
+if (firebase.apps.length === 0) {
+  firebase.initializeApp(firebaseConfig);
+}
 
-export default function App() {
-  const [isReady, setIsReady] = useState(false);
-  const [state, dispatch] = React.useReducer(
-    (prevState: any, action: { type: any; token: any }) => {
-      switch (action.type) {
-        case 'RESTORE_TOKEN':
-          return {
-            ...prevState,
-            userToken: action.token,
-            isLoading: false,
-          };
-        case 'SIGN_IN':
-          return {
-            ...prevState,
-            isSignout: false,
-            userToken: action.token,
-          };
-        case 'SIGN_OUT':
-          return {
-            ...prevState,
-            isSignout: true,
-            userToken: null,
-          };
-      }
+const AppStack = createStackNavigator(
+  {
+    Home: {
+      screen: MainStack,
+    },
+  },
+  {
+    headerMode: 'none',
+    navigationOptions: {
+      header: null,
+      animationTypeForReplace: 'push',
+    },
+  },
+);
+
+const AuthStack = createStackNavigator(
+  {
+    Login: LoginScreen,
+    Register: RegisterScreen,
+  },
+  {
+    headerMode: 'none',
+    navigationOptions: {
+      header: null,
+      animationTypeForReplace: 'push',
+    },
+  },
+);
+
+export default createAppContainer(
+  createSwitchNavigator(
+    {
+      Loading: LoadingScreen,
+      App: AppStack,
+      Auth: AuthStack,
     },
     {
-      isLoading: true,
-      isSignout: false,
-      userToken: null,
+      initialRouteName: 'Loading',
     },
-  );
-  const loadAssets = (): any => {
-    const images = cacheImages([
-      'https://i.kym-cdn.com/photos/images/newsfeed/000/290/992/0aa.jpg',
-      require('./assets/splash.png'),
-    ]);
-    const fonts = cacheFonts([Ionicons.font, FontAwesome.font]);
-    return Promise.all([...images, ...fonts]);
-  };
-  const onFinish = () => setIsReady(true);
-  return isReady ? (
-    <>
-      <NavigationContainer>
-        <Stack />
-      </NavigationContainer>
-      <StatusBar barStyle="dark-content" />
-    </>
-  ) : (
-    <AppLoading
-      startAsync={loadAssets}
-      onFinish={onFinish}
-      onError={console.error}
-    />
-  );
-}
+  ),
+);

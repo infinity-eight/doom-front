@@ -3,6 +3,7 @@ import { useNavigation } from '@react-navigation/native';
 import styled from 'styled-components/native';
 import Input from '../../components/Search/Input';
 import List from '../../components/List';
+import List2 from '../../components/List2';
 
 const MainWarp = styled.ScrollView`
   background-color: white;
@@ -26,10 +27,8 @@ const RegisterBtn = styled.Text`
 `;
 
 const ListWarp = styled.View`
-  margin-top: 10px;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: space-around;
 `;
 
 export default function () {
@@ -43,11 +42,7 @@ export default function () {
         </TouchableOpacity>
         <ListWarp>
           <List />
-          <List />
-          <List />
-          <List />
-          <List />
-          <List />
+          <List2 />
         </ListWarp>
       </MainWarp>
     </>

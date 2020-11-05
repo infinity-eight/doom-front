@@ -6,7 +6,7 @@ import NextBlood from '../../components/NextBlood';
 
 const { width: WIDTH, height: HEIGHT } = Dimensions.get('window');
 
-const MainWarp = styled.View`
+const MainWarp = styled.ScrollView`
   background-color: white;
 
   flex: 1;

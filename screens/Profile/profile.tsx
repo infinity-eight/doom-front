@@ -1,7 +1,8 @@
 import * as React from 'react';
-import { AsyncStorage, Platform } from 'react-native';
+import { Platform } from 'react-native';
 import styled from 'styled-components/native';
 import { Ionicons } from '@expo/vector-icons';
+import * as firebase from 'firebase';
 
 const MainWarp = styled.View`
   flex: 1;
@@ -9,8 +10,8 @@ const MainWarp = styled.View`
 
 const ProfileView = styled.View`
   height: 110px;
-  flex-direction: row;
-  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
   background-color: white;
   border-bottom-color: rgb(230, 230, 230);
   border-bottom-width: 1px;
@@ -33,24 +34,12 @@ const ImageWarp = styled.View`
   justify-content: center;
 `;
 
-const NameWarp = styled.View`
-  height: 100%;
-  justify-content: center;
-`;
-
 const Image = styled.Image`
   width: 70px;
   height: 70px;
-  margin-left: 10px;
   border-radius: 50px;
   border-color: #fff;
   border-width: 1px;
-`;
-
-const Name = styled.Text`
-  margin-left: 10px;
-  font-weight: 900;
-  font-size: 17px;
 `;
 
 const BtnWarp = styled.View`
@@ -102,44 +91,46 @@ const SettingText = styled.Text`
   font-size: 15px;
 `;
 
-export default function () {
-  let iconName = Platform.OS === 'ios' ? 'ios-' : 'md-';
-  return (
-    <MainWarp>
-      <ProfileView>
-        <ImageWarp>
-          <Image source={require('../../images/defaultProfile.jpg')} />
-        </ImageWarp>
-        <NameWarp>
-          <Name>노수하</Name>
-        </NameWarp>
-      </ProfileView>
-      <BtnView>
-        <BtnWarp>
-          <Btn>
-            <BtnImage source={require('../../images/icons/15_1.png')} />
-            <BtnText>헌혈내역</BtnText>
-          </Btn>
-        </BtnWarp>
-        <BtnWarp>
-          <Btn>
-            <BtnImage source={require('../../images/icons/16_1.png')} />
-            <BtnText>기부내역</BtnText>
-          </Btn>
-        </BtnWarp>
-        <BtnWarp>
-          <Btn>
-            <BtnImage source={require('../../images/icons/17_1.png')} />
-            <BtnText>헌혈증서</BtnText>
-          </Btn>
-        </BtnWarp>
-      </BtnView>
-      <SettingView>
-        <SettingBtn>
-          <SettingIcons name={`${iconName}log-out`} size={26} />
-          <SettingText>로그아웃</SettingText>
-        </SettingBtn>
-      </SettingView>
-    </MainWarp>
-  );
+let iconName = Platform.OS === 'ios' ? 'ios-' : 'md-';
+export default class Profile extends React.Component {
+  signOutUser = () => {
+    firebase.auth().signOut();
+  };
+  render() {
+    return (
+      <MainWarp>
+        <ProfileView>
+          <ImageWarp>
+            <Image source={require('../../images/defaultProfile.jpg')} />
+          </ImageWarp>
+        </ProfileView>
+        <BtnView>
+          <BtnWarp>
+            <Btn>
+              <BtnImage source={require('../../images/icons/15_1.png')} />
+              <BtnText>헌혈내역</BtnText>
+            </Btn>
+          </BtnWarp>
+          <BtnWarp>
+            <Btn>
+              <BtnImage source={require('../../images/icons/16_1.png')} />
+              <BtnText>기부내역</BtnText>
+            </Btn>
+          </BtnWarp>
+          <BtnWarp>
+            <Btn>
+              <BtnImage source={require('../../images/icons/17_1.png')} />
+              <BtnText>헌혈증서</BtnText>
+            </Btn>
+          </BtnWarp>
+        </BtnView>
+        <SettingView>
+          <SettingBtn onPress={this.signOutUser}>
+            <SettingIcons name={`${iconName}log-out`} size={26} />
+            <SettingText>로그아웃</SettingText>
+          </SettingBtn>
+        </SettingView>
+      </MainWarp>
+    );
+  }
 }

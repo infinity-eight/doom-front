@@ -12,5 +12,7 @@ web-build/
 .eslintignore
 .eslintrc
 
+.env
+
 # macOS
 .DS_Store
