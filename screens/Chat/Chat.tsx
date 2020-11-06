@@ -26,9 +26,7 @@ const TextInput = styled.TextInput`
 
 const Button = styled.Button``;
 
-const firebaseConfig = {
-  ...
-};
+const firebaseConfig = {...};
 
 if (firebase.apps.length === 0) {
   firebase.initializeApp(firebaseConfig);

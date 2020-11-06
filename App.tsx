@@ -6,9 +6,7 @@ import RegisterScreen from './screens/Auth/RegisterScreen';
 import MainStack from './navigation/MainStack';
 import * as firebase from 'firebase';
 
-const firebaseConfig = {
-  ...
-};
+const firebaseConfig = {...};
 
 if (firebase.apps.length === 0) {
   firebase.initializeApp(firebaseConfig);
@@ -24,7 +22,6 @@ const AppStack = createStackNavigator(
     headerMode: 'none',
     navigationOptions: {
       header: null,
-      animationTypeForReplace: 'push',
     },
   },
 );
@@ -38,7 +35,6 @@ const AuthStack = createStackNavigator(
     headerMode: 'none',
     navigationOptions: {
       header: null,
-      animationTypeForReplace: 'push',
     },
   },
 );
