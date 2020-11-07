@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Platform } from 'react-native';
-import MapView, { PROVIDER_GOOGLE, Marker } from 'react-native-maps';
+import MapView, { Marker } from 'react-native-maps';
 import styled from 'styled-components/native';
 
 const MainWarp = styled.View`
@@ -23,20 +23,26 @@ export default function () {
     <MainWarp>
       <MapView
         style={{ flex: 1 }}
-        provider={PROVIDER_GOOGLE}
+
         mapType={Platform.OS == 'android' ? 'none' : 'standard'}
         initialRegion={{
-          latitude: 37.5642135,
-          longitude: 127.0016985,
+          latitude: 37.552130,
+          longitude: 126.951750,
           latitudeDelta: 0.0922,
           longitudeDelta: 0.0421,
         }}
-      />
+      >
       <Marker
         coordinate={{ latitude: 37.5642135, longitude: 127.0016985 }}
         title={'헌혈의집'}
         description={'헌혈의집 입니다.'}
       />
+      <Marker
+        coordinate={{ latitude: 37.5542135, longitude: 126.9306985 }}
+        title={'헌혈의집 신촌센터'}
+        description={'헌혈의집 신촌센터입니다.'}
+      />
+      </MapView>
     </MainWarp>
   );
 }

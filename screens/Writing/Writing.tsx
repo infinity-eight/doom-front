@@ -110,7 +110,7 @@ const OffBtnText = styled.Text`
 
 const MainText = styled.TextInput`
   width: 300px;
-  height: 250px;
+  height: 200px;
   padding: 8px;
   border: solid 2px #f33328;
   border-radius: 20px;
@@ -129,7 +129,7 @@ const Image = styled.Image`
 
 const ImageBtn = styled.TouchableOpacity`
   width: 300px;
-  height: 250px;
+  height: 200px;
   background-color: white;
   border: solid 2px #f33328;
   border-radius: 20px;

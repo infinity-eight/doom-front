@@ -5,7 +5,6 @@ import Pin from '../../components/Pin';
 import MapTaps from '../MapTaps';
 import Writing from '../../screens/Writing';
 import Detail from '../../components/Detail';
-import Detail2 from '../../components/Detail2';
 
 const DonationStack = createStackNavigator();
 
@@ -36,14 +35,6 @@ export default function () {
       <DonationStack.Screen
         name="Detail"
         component={Detail}
-        options={{
-          title: '',
-          headerTransparent: true,
-        }}
-      />
-      <DonationStack.Screen
-        name="Detail2"
-        component={Detail2}
         options={{
           title: '',
           headerTransparent: true,

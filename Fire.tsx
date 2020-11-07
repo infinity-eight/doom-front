@@ -1,6 +1,15 @@
 import firebase from 'firebase';
+require('firebase/firestore');
 
-const firebaseConfig = {...};
+const firebaseConfig = {
+  apiKey: 'AIzaSyCwTU6CX9cBOrIDjEwwVT37vLJkVRQcZWY',
+  authDomain: 'doom-fff37.firebaseapp.com',
+  databaseURL: 'https://doom-fff37.firebaseio.com',
+  projectId: 'doom-fff37',
+  storageBucket: 'doom-fff37.appspot.com',
+  messagingSenderId: '715745267751',
+  appId: '1:715745267751:web:11d54357ec4e9e8bbc7e02',
+};
 
 class Fire {
   static shared: Fire;
@@ -18,7 +27,7 @@ class Fire {
     text,
     localUri,
   }: any) => {
-    const remoteUri = await this.uploadPhotoAsync(localUri);
+    const remoteUri = await this.uploadPhotoAsync(localUri, `photos/${this.uid}/${Date.now()}`);
 
     return new Promise((res, rej) => {
       this.firestore
@@ -44,14 +53,15 @@ class Fire {
     });
   };
 
-  uploadPhotoAsync = async (uri: any) => {
-    const path = `photos/${this.uid}/${Date.now()}.jpg`;
-
+  uploadPhotoAsync = async (uri: any, filename: any) => {
     return new Promise(async (res, rej) => {
       const response = await fetch(uri);
       const file = await response.blob();
 
-      let upload = firebase.storage().ref(path).put(file);
+      let upload = firebase
+        .storage()
+        .ref(filename)
+        .put(file);
 
       upload.on(
         'state_changed',
@@ -65,6 +75,39 @@ class Fire {
         },
       );
     });
+  };
+
+  createUser = async (user: any) => {
+    let remoteUri = null;
+
+    try {
+      await firebase
+        .auth()
+        .createUserWithEmailAndPassword(user.email, user.password);
+
+      let db = this.firestore.collection('users').doc(this.uid);
+
+      db.set({
+        name: user.name,
+        email: user.email,
+        avatar: null
+      });
+
+      if (user.avatar) {
+        remoteUri = await this.uploadPhotoAsync(
+          user.avatar,
+          `avatars/${this.uid}`
+        );
+
+        db.set({ avatar: remoteUri }, { merge: true });
+      }
+    } catch (error) {
+      alert('Error: ', error);
+    }
+  };
+
+  signOut = () => {
+    firebase.auth().signOut();
   };
 
   get firestore() {

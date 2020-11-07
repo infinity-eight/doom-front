@@ -1,9 +1,12 @@
 import React from 'react';
 import { Dimensions } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 import { Chevron } from 'react-native-shapes';
 import RNPickerSelect from 'react-native-picker-select';
 import styled from 'styled-components/native';
-import firebase from 'firebase';
+import Fire from '../../../Fire';
+import UserPermissions from '../../../utilities/UserPermissions'
+import * as ImagePicker from 'expo-image-picker';
 
 const { width: WIDTH, height: HEIGHT } = Dimensions.get('window');
 
@@ -36,6 +39,18 @@ const pickerStyle = {
   },
 };
 
+const TouchableOpacity = styled.TouchableOpacity`
+  width: 100px;
+    height: 100px;
+    position: absolute;
+    top: 50px;
+    background-color: #e1e2e6;
+    border-radius: 50px;
+    margin-top: 48px;
+    justify-content: center;
+    align-items: center;
+`;
+
 const MainWarp = styled.View`
   background-color: white;
   flex: 1;
@@ -58,10 +73,9 @@ const ErrorText = styled.Text`
 
 const Image = styled.Image`
   position: absolute;
-  top: ${HEIGHT / 7}px;
-  background-color: white;
-  width: 150px;
-  height: 150px;
+    width: 100px;
+    height: 100px;
+    border-radius: 50px;
 `;
 
 const NameBloodWrap = styled.View`
@@ -138,38 +152,50 @@ interface Props {
 
 export default class RegisterScreen extends React.Component<Props> {
   state = {
-    name: '',
+    user: {
+      name: '',
+      email: '',
+      password: '',
+      avatar: null
+    },
     bloodType: '',
-    email: '',
-    password: '',
-    repassword: '',
-    errorMessage: null,
+    errorMessage: null
   };
 
-  /* handleSubmit = () => {
-    if(this.state.password === this.state.repassword){
-      this.handleSignUp
-    } else {
-      this.setState({errorMessage: 'They have different passwords.'})
+  handlePickAvatar = async () => {
+    UserPermissions.getCameraPermission();
+
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsEditing: true,
+      aspect: [4, 3]
+    });
+
+    if (!result.cancelled) {
+      this.setState({ user: { ...this.state.user, avatar: result.uri } });
     }
-  } */
+  };
 
   handleSignUp = () => {
-    firebase
-      .auth()
-      .createUserWithEmailAndPassword(this.state.email, this.state.password)
-      .then((userCredentials) => {
-        return userCredentials.user?.updateProfile({
-          displayName: this.state.name,
-        });
-      })
-      .catch((error) => this.setState({ errorMessage: error.message }));
+    Fire.shared.createUser(this.state.user);
   };
 
   render() {
     return (
       <MainWarp>
-        <Image source={require('./../../../assets/icon.png')} />
+        <TouchableOpacity
+            onPress={this.handlePickAvatar}
+          >
+            <Image
+              source={{ uri: this.state.user.avatar }}
+            />
+            <Ionicons
+              name='ios-add'
+              size={40}
+              color='#fff'
+              style={{ marginTop: 6, marginLeft: 2 }}
+            ></Ionicons>
+          </TouchableOpacity>
         <ErrorView>
           {this.state.errorMessage && (
             <ErrorText>{this.state.errorMessage}</ErrorText>
@@ -181,8 +207,9 @@ export default class RegisterScreen extends React.Component<Props> {
               placeholder="이름"
               autoCapitalize="none"
               textContentType="name"
-              value={this.state.name}
-              onChangeText={(name: any) => this.setState({ name })}
+              value={this.state.user.name}
+              onChangeText={(name: any) =>
+                this.setState({ user: { ...this.state.user, name }})}
             />
             <RNPickerSelect
               onValueChange={(bloodType) => this.setState({ bloodType })}
@@ -212,16 +239,18 @@ export default class RegisterScreen extends React.Component<Props> {
             textContentType="emailAddress"
             keyboardType="email-address"
             autoCapitalize="none"
-            value={this.state.email}
-            onChangeText={(email: any) => this.setState({ email })}
+            value={this.state.user.email}
+            onChangeText={(email: any) =>
+              this.setState({ user: { ...this.state.user, email } })}
           />
           <TextInput
             placeholder="비밀번호"
             textContentType="password"
             autoCapitalize="none"
             secureTextEntry={true}
-            value={this.state.password}
-            onChangeText={(password: any) => this.setState({ password })}
+            value={this.state.user.password}
+            onChangeText={(password: any) =>
+              this.setState({ user: { ...this.state.user, password } })}
           />
           {/* <TextInput 
         placeholder="비밀번호 확인"

@@ -2,6 +2,9 @@ import React from 'react';
 import { Dimensions } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import styled from 'styled-components/native';
+import moment from 'moment';
+import 'moment/locale/ko';
+import Fire from '../Fire';
 
 const { width: WIDTH, height: HEIGHT } = Dimensions.get('window');
 
@@ -10,7 +13,7 @@ const MainWarp = styled.ScrollView`
 `;
 
 const ContentsWarp = styled.View`
-  padding: 10px;
+  padding: 13px;
 `;
 
 const Line = styled.View`
@@ -25,14 +28,18 @@ const Image = styled.Image`
 `;
 
 const Name = styled.Text`
-  margin: 10px;
   font-size: 30px;
   font-weight: 900;
 `;
 
-const Date = styled.Text``;
+const Date = styled.Text`
+margin: 15px 0 15px 0;
+color: #000000AA;
+`;
 
 const BloodType = styled.Text``;
+
+const HospitalText = styled.Text``;
 
 const MainText = styled.Text`
   font-size: 16px;
@@ -61,22 +68,36 @@ const GoBtnText = styled.Text`
   font-weight: bold;
 `;
 
-export default function () {
+export default function ({
+  route: {
+    params: {
+      redBlood,
+      platelets,
+      wholeBlood,
+      name,
+      bloodType,
+      hospitalName,
+      text,
+      uid,
+      timestamp,
+      image,
+    },
+  },
+}: any) {
   const navigation = useNavigation();
   return (
     <>
       <MainWarp>
-        <Image source={require('../images/patient_1.jpg')} />
+        <Image source={{ uri: image }} />
         <ContentsWarp>
-          <Name>김현성</Name>
-          <Date>
-            ~20-11-10 <BloodType>🩸A+ 혈소판</BloodType>
-          </Date>
+          <Name>{name}</Name>
           <Line></Line>
-          <MainText>
-            지정헌혈 부탁드립니다. 가족이 병원에 입원하여 수혈을 받는 상황인데,
-            혈액이 부족하다고 합니다. 헌혈원은 아무곳에서 가능합니다.
-          </MainText>
+          <Date>
+            <BloodType>🩸{bloodType} ・ </BloodType>
+            <HospitalText>{hospitalName} ・ </HospitalText>            
+            {moment(timestamp).fromNow()}
+          </Date>
+          <MainText>{text}</MainText>
         </ContentsWarp>
       </MainWarp>
       <GoBtnView>

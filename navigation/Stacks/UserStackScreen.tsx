@@ -1,8 +1,9 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import styled from 'styled-components/native';
-import * as firebase from 'firebase';
 import Profile from '../../screens/Profile';
+import Fire from '../../Fire';
+
 
 const Text = styled.Text`
   padding: 10px;
@@ -18,14 +19,24 @@ const UserStack = createStackNavigator();
 
 export default class UserStackScreen extends React.Component {
   state = {
-    email: '',
-    displayName: '',
+    user: {}
   };
 
-  componentDidMount() {
-    const { email, displayName }: any = firebase.auth().currentUser;
+  unsubscribe = null;
 
-    this.setState({ email, displayName });
+  componentDidMount() {
+    const user = this.props.uid || Fire.shared.uid;
+
+    this.unsubscribe = Fire.shared.firestore
+      .collection('users')
+      .doc(user)
+      .onSnapshot(doc => {
+        this.setState({ user: doc.data() });
+      });
+  }
+
+  componentWillUnmount() {
+    this.unsubscribe();
   }
   render() {
     return (
@@ -37,7 +48,7 @@ export default class UserStackScreen extends React.Component {
             title: '',
             headerLeft: () => (
               <Text>
-                <Name>{this.state.displayName}</Name>님, 안녕하세요
+                <Name>{this.state.user.name}</Name> 님, 안녕하세요
               </Text>
             ),
           }}

@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Platform } from 'react-native';
 import styled from 'styled-components/native';
 import { Ionicons } from '@expo/vector-icons';
-import * as firebase from 'firebase';
+import Fire from '../../Fire';
 
 const MainWarp = styled.View`
   flex: 1;
@@ -93,15 +93,38 @@ const SettingText = styled.Text`
 
 let iconName = Platform.OS === 'ios' ? 'ios-' : 'md-';
 export default class Profile extends React.Component {
-  signOutUser = () => {
-    firebase.auth().signOut();
+  state = {
+    user: {}
   };
+
+  unsubscribe = null;
+
+  componentDidMount() {
+    const user = this.props.uid || Fire.shared.uid;
+
+    this.unsubscribe = Fire.shared.firestore
+      .collection('users')
+      .doc(user)
+      .onSnapshot(doc => {
+        this.setState({ user: doc.data() });
+      });
+  }
+
+  componentWillUnmount() {
+    this.unsubscribe();
+  }
+
   render() {
     return (
       <MainWarp>
         <ProfileView>
           <ImageWarp>
-            <Image source={require('../../images/defaultProfile.jpg')} />
+            <Image source={
+              this.state.user.avatar
+              ? {uri: this.state.user.avatar}
+              : require('../../images/defaultProfile.jpg')
+              } 
+              />
           </ImageWarp>
         </ProfileView>
         <BtnView>
@@ -125,7 +148,9 @@ export default class Profile extends React.Component {
           </BtnWarp>
         </BtnView>
         <SettingView>
-          <SettingBtn onPress={this.signOutUser}>
+          <SettingBtn onPress={() => {
+            Fire.shared.signOut();
+          }}>
             <SettingIcons name={`${iconName}log-out`} size={26} />
             <SettingText>로그아웃</SettingText>
           </SettingBtn>
