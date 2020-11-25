@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components/native';
-import { Dimensions, ActivityIndicator } from 'react-native';
+import { Dimensions } from 'react-native';
 import Input from '../../components/Search/Input';
 import List from '../../components/List';
 import * as firebase from 'firebase';

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Dimensions } from 'react-native';
+import { Dimensions, StatusBar } from 'react-native';
 import styled from 'styled-components/native';
 import * as firebase from 'firebase';
 
@@ -126,6 +126,7 @@ export default class LoginScreen extends React.Component<Props> {
             <RegisterBtnText>회원가입</RegisterBtnText>
           </RegisterBtn>
         </BtnWarp>
+        <StatusBar barStyle={'dark-content'} />
       </MainWarp>
     );
   }
