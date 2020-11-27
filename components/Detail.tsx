@@ -33,8 +33,8 @@ const Name = styled.Text`
 `;
 
 const Date = styled.Text`
-margin: 15px 0 15px 0;
-color: #000000AA;
+  margin: 15px 0 15px 0;
+  color: #000000aa;
 `;
 
 const BloodType = styled.Text``;
@@ -94,7 +94,7 @@ export default function ({
           <Line></Line>
           <Date>
             <BloodType>🩸{bloodType} ・ </BloodType>
-            <HospitalText>{hospitalName} ・ </HospitalText>            
+            <HospitalText>{hospitalName} ・ </HospitalText>
             {moment(timestamp).fromNow()}
           </Date>
           <MainText>{text}</MainText>

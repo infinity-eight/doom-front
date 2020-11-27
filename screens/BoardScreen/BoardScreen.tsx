@@ -63,7 +63,7 @@ const formatData = (data: any, numColumns: any) => {
 
 const numColumns = 3;
 
-export default function Board({ navigation }: any) {
+export default function ({ navigation }: any) {
   const [loading, setLoading] = useState(true); // Set loading to true on component mount
   const [users, setUsers] = useState([]); // Initial empty array of users
 

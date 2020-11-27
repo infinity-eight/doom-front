@@ -1,9 +1,9 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import Board from '../../screens/Board';
+import Board from '../../screens/BoardScreen';
 import Pin from '../../components/Pin';
 import MapTaps from '../MapTaps';
-import Writing from '../../screens/Writing';
+import Writing from '../../screens/WritingScreen';
 import Detail from '../../components/Detail';
 
 const DonationStack = createStackNavigator();
@@ -12,6 +12,7 @@ export default function () {
   return (
     <DonationStack.Navigator
       screenOptions={{
+        headerTintColor: '#000000',
         headerBackTitleVisible: false,
       }}
     >

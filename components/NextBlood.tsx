@@ -1,8 +1,11 @@
 import React from 'react';
-import { View } from 'react-native';
 import CountDown from 'react-native-countdown-component';
 import styled from 'styled-components/native';
 import Title from './Title';
+
+const MainView = styled.View`
+  margin-bottom: 40px;
+`;
 
 const DataWrap = styled.View`
   width: 280px;
@@ -10,7 +13,6 @@ const DataWrap = styled.View`
   align-items: center;
   justify-content: center;
   margin-left: 20px;
-  margin-bottom: 70px;
   border-radius: 30px;
   border-top-left-radius: 0;
   background-color: #eeeeee;
@@ -20,7 +22,7 @@ const Image = styled.Image``;
 
 export default function NextBlood({ title }: any) {
   return (
-    <View>
+    <MainView>
       <Title title={title} />
       <DataWrap>
         <CountDown
@@ -51,6 +53,6 @@ export default function NextBlood({ title }: any) {
           source={require('../images/character.png')}
         />
       </DataWrap>
-    </View>
+    </MainView>
   );
 }

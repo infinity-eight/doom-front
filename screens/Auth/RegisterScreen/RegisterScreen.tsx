@@ -5,7 +5,7 @@ import { Chevron } from 'react-native-shapes';
 import RNPickerSelect from 'react-native-picker-select';
 import styled from 'styled-components/native';
 import Fire from '../../../Fire';
-import UserPermissions from '../../../utilities/UserPermissions'
+import UserPermissions from '../../../utilities/UserPermissions';
 import * as ImagePicker from 'expo-image-picker';
 
 const { width: WIDTH, height: HEIGHT } = Dimensions.get('window');
@@ -41,14 +41,14 @@ const pickerStyle = {
 
 const TouchableOpacity = styled.TouchableOpacity`
   width: 100px;
-    height: 100px;
-    position: absolute;
-    top: 50px;
-    background-color: #e1e2e6;
-    border-radius: 50px;
-    margin-top: 48px;
-    justify-content: center;
-    align-items: center;
+  height: 100px;
+  position: absolute;
+  top: 50px;
+  background-color: #e1e2e6;
+  border-radius: 50px;
+  margin-top: 48px;
+  justify-content: center;
+  align-items: center;
 `;
 
 const MainWarp = styled.View`
@@ -73,9 +73,9 @@ const ErrorText = styled.Text`
 
 const Image = styled.Image`
   position: absolute;
-    width: 100px;
-    height: 100px;
-    border-radius: 50px;
+  width: 100px;
+  height: 100px;
+  border-radius: 50px;
 `;
 
 const NameBloodWrap = styled.View`
@@ -156,10 +156,10 @@ export default class RegisterScreen extends React.Component<Props> {
       name: '',
       email: '',
       password: '',
-      avatar: null
+      avatar: null,
     },
     bloodType: '',
-    errorMessage: null
+    errorMessage: null,
   };
 
   handlePickAvatar = async () => {
@@ -168,7 +168,7 @@ export default class RegisterScreen extends React.Component<Props> {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
       allowsEditing: true,
-      aspect: [4, 3]
+      aspect: [4, 3],
     });
 
     if (!result.cancelled) {
@@ -183,19 +183,15 @@ export default class RegisterScreen extends React.Component<Props> {
   render() {
     return (
       <MainWarp>
-        <TouchableOpacity
-            onPress={this.handlePickAvatar}
-          >
-            <Image
-              source={{ uri: this.state.user.avatar }}
-            />
-            <Ionicons
-              name='ios-add'
-              size={40}
-              color='#fff'
-              style={{ marginTop: 6, marginLeft: 2 }}
-            ></Ionicons>
-          </TouchableOpacity>
+        <TouchableOpacity onPress={this.handlePickAvatar}>
+          <Image source={{ uri: this.state.user.avatar }} />
+          <Ionicons
+            name="ios-add"
+            size={40}
+            color="#fff"
+            style={{ marginTop: 6, marginLeft: 2 }}
+          ></Ionicons>
+        </TouchableOpacity>
         <ErrorView>
           {this.state.errorMessage && (
             <ErrorText>{this.state.errorMessage}</ErrorText>
@@ -209,7 +205,8 @@ export default class RegisterScreen extends React.Component<Props> {
               textContentType="name"
               value={this.state.user.name}
               onChangeText={(name: any) =>
-                this.setState({ user: { ...this.state.user, name }})}
+                this.setState({ user: { ...this.state.user, name } })
+              }
             />
             <RNPickerSelect
               onValueChange={(bloodType) => this.setState({ bloodType })}
@@ -241,7 +238,8 @@ export default class RegisterScreen extends React.Component<Props> {
             autoCapitalize="none"
             value={this.state.user.email}
             onChangeText={(email: any) =>
-              this.setState({ user: { ...this.state.user, email } })}
+              this.setState({ user: { ...this.state.user, email } })
+            }
           />
           <TextInput
             placeholder="비밀번호"
@@ -250,7 +248,8 @@ export default class RegisterScreen extends React.Component<Props> {
             secureTextEntry={true}
             value={this.state.user.password}
             onChangeText={(password: any) =>
-              this.setState({ user: { ...this.state.user, password } })}
+              this.setState({ user: { ...this.state.user, password } })
+            }
           />
           {/* <TextInput 
         placeholder="비밀번호 확인"

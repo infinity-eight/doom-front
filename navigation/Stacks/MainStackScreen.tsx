@@ -1,7 +1,7 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import styled from 'styled-components/native';
-import Main from '../../screens/Main';
+import Main from '../../screens/MainScreen';
 import Pin from '../../components/Pin';
 import MapTaps from '../MapTaps';
 import Fire from '../../Fire';
@@ -24,7 +24,7 @@ const MainStack = createStackNavigator();
 
 export default class MainStackScreen extends React.Component<Props> {
   state = {
-    user: {}
+    user: {},
   };
 
   unsubscribe = null;
@@ -35,7 +35,7 @@ export default class MainStackScreen extends React.Component<Props> {
     this.unsubscribe = Fire.shared.firestore
       .collection('users')
       .doc(user)
-      .onSnapshot(doc => {
+      .onSnapshot((doc) => {
         this.setState({ user: doc.data() });
       });
   }
@@ -49,6 +49,7 @@ export default class MainStackScreen extends React.Component<Props> {
       <MainStack.Navigator
         mode="modal"
         screenOptions={{
+          headerTintColor: '#000000',
           headerBackTitleVisible: false,
         }}
       >

@@ -27,7 +27,10 @@ class Fire {
     text,
     localUri,
   }: any) => {
-    const remoteUri = await this.uploadPhotoAsync(localUri, `photos/${this.uid}/${Date.now()}`);
+    const remoteUri = await this.uploadPhotoAsync(
+      localUri,
+      `photos/${this.uid}/${Date.now()}`,
+    );
 
     return new Promise((res, rej) => {
       this.firestore
@@ -58,10 +61,7 @@ class Fire {
       const response = await fetch(uri);
       const file = await response.blob();
 
-      let upload = firebase
-        .storage()
-        .ref(filename)
-        .put(file);
+      let upload = firebase.storage().ref(filename).put(file);
 
       upload.on(
         'state_changed',
@@ -90,13 +90,13 @@ class Fire {
       db.set({
         name: user.name,
         email: user.email,
-        avatar: null
+        avatar: null,
       });
 
       if (user.avatar) {
         remoteUri = await this.uploadPhotoAsync(
           user.avatar,
-          `avatars/${this.uid}`
+          `avatars/${this.uid}`,
         );
 
         db.set({ avatar: remoteUri }, { merge: true });

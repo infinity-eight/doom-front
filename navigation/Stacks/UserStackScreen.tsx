@@ -1,9 +1,13 @@
 import React from 'react';
+import { TouchableOpacity, Platform } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import styled from 'styled-components/native';
-import Profile from '../../screens/Profile';
+import { Ionicons } from '@expo/vector-icons';
+import Profile from '../../screens/ProfileScreen';
+import SettingScreen from '../../screens/SettingsScreen';
 import Fire from '../../Fire';
 
+let iconName = Platform.OS === 'ios' ? 'ios-' : 'md-';
 
 const Text = styled.Text`
   padding: 10px;
@@ -17,9 +21,13 @@ const Name = styled.Text`
 
 const UserStack = createStackNavigator();
 
-export default class UserStackScreen extends React.Component {
+interface Props {
+  navigation: any;
+}
+
+export default class UserStackScreen extends React.Component<Props> {
   state = {
-    user: {}
+    user: {},
   };
 
   unsubscribe = null;
@@ -30,7 +38,7 @@ export default class UserStackScreen extends React.Component {
     this.unsubscribe = Fire.shared.firestore
       .collection('users')
       .doc(user)
-      .onSnapshot(doc => {
+      .onSnapshot((doc) => {
         this.setState({ user: doc.data() });
       });
   }
@@ -40,9 +48,14 @@ export default class UserStackScreen extends React.Component {
   }
   render() {
     return (
-      <UserStack.Navigator>
+      <UserStack.Navigator
+        screenOptions={{
+          headerTintColor: '#000000',
+          headerBackTitleVisible: false,
+        }}
+      >
         <UserStack.Screen
-          name="MY"
+          name="프로필"
           component={Profile}
           options={{
             title: '',
@@ -51,8 +64,21 @@ export default class UserStackScreen extends React.Component {
                 <Name>{this.state.user.name}</Name> 님, 안녕하세요
               </Text>
             ),
+            headerRight: () => (
+              <TouchableOpacity
+                onPress={() => this.props.navigation.navigate('설정')}
+              >
+                <Ionicons
+                  name={`${iconName}settings`}
+                  color={'#f33328'}
+                  size={30}
+                  style={{ marginRight: 10 }}
+                />
+              </TouchableOpacity>
+            ),
           }}
         />
+        <UserStack.Screen name="설정" component={SettingScreen} />
       </UserStack.Navigator>
     );
   }

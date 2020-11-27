@@ -13,6 +13,7 @@ export default function () {
         mode="modal"
         screenOptions={{
           headerShown: false,
+          headerTintColor: '#000000',
           headerBackTitleVisible: false,
         }}
       >

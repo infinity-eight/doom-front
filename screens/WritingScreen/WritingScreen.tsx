@@ -156,7 +156,7 @@ interface Props {
 
 let iconName = Platform.OS === 'ios' ? 'ios-' : 'md-';
 
-export default class Writing extends React.Component<Props> {
+export default class WritingScreen extends React.Component<Props> {
   state = {
     redBlood: false,
     platelets: false,

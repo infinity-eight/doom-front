@@ -28,8 +28,7 @@ const Name = styled.Text`
   line-height: 30px;
 `;
 
-const DateBTWrap = styled.View`
-`;
+const DateBTWrap = styled.View``;
 
 const BT = styled.Text`
   position: absolute;
@@ -42,7 +41,7 @@ const Date = styled.Text`
   right: 8px;
   line-height: 20px;
   text-align: center;
-  color: #000000AA;
+  color: #000000aa;
 `;
 
 export default function ({
